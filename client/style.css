@@ -1,69 +1,42 @@
 body {
     background: #111;
     color: white;
-    font-family: Arial, sans-serif;
     text-align: center;
-}
-
-h1 {
-    margin-top: 20px;
-}
-
-#game {
-    margin-top: 40px;
-}
-
-#top-card {
-    width: 120px;
-    height: 180px;
-    background: crimson;
-    border-radius: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-    font-size: 24px;
-    font-weight: bold;
+    font-family: Arial;
 }
 
 #hand {
     display: flex;
     justify-content: center;
     gap: 10px;
-    margin-top: 40px;
-    flex-wrap: wrap;
+    margin-top: 30px;
 }
 
 .card {
-    width: 90px;
-    height: 140px;
+    width: 80px;
+    height: 120px;
     border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    font-size: 22px;
+    font-size: 30px;
     font-weight: bold;
-    transition: 0.2s;
-}
-
-.card:hover {
-    transform: translateY(-10px);
 }
 
 .red {
-    background: #ff3b30;
+    background: red;
 }
 
 .blue {
-    background: #007aff;
+    background: blue;
 }
 
 .green {
-    background: #34c759;
+    background: green;
 }
 
 .yellow {
-    background: #ffcc00;
+    background: yellow;
     color: black;
 }
