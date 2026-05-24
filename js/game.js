@@ -79,13 +79,6 @@ class Card {
 // GLOBALS
 // =========================
 
-const colors = [
-    "red",
-    "blue",
-    "green",
-    "yellow"
-];
-
 const deck = [];
 
 const players = [
