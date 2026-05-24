@@ -56,26 +56,6 @@ socket.on("errorMessage", message => {
 });
 
 // =========================
-// CARD CLASS
-// =========================
-
-class Card {
-
-    constructor(
-        color,
-        type,
-        value = null
-    ) {
-
-        this.color = color;
-        this.type = type;
-        this.value = value;
-
-    }
-
-}
-
-// =========================
 // GLOBALS
 // =========================
 
