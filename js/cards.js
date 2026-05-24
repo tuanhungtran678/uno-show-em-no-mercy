@@ -1,4 +1,13 @@
-const colors = ["red", "blue", "green", "yellow"];
+// =========================
+// CONST COLOR
+// =========================
+
+const colors = [
+    "red",
+    "blue",
+    "green",
+    "yellow"
+];
 
 class Card {
 
