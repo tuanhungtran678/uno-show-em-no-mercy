@@ -1,6 +1,7 @@
 const express = require("express");
 const http = require("http");
 const { Server } = require("socket.io");
+const socket = io("http://localhost:3000");
 
 const app = express();
 
@@ -12,16 +13,28 @@ const io = new Server(server, {
     }
 });
 
+let players = [];
+
 io.on("connection", socket => {
 
-    console.log("Player connected:", socket.id);
+    console.log("Player joined");
+
+    players.push(socket.id);
+
+    socket.emit("playerIndex", players.length - 1);
+
+    socket.on("playCard", data => {
+
+        socket.broadcast.emit("opponentPlayed", data);
+
+    });
 
     socket.on("disconnect", () => {
-        console.log("Player disconnected:", socket.id);
+
+        players = players.filter(id => id !== socket.id);
+
     });
 
 });
 
-server.listen(3000, () => {
-    console.log("Server running on port 3000");
-});
+server.listen(3000);
