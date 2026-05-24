@@ -65,14 +65,6 @@ socket.on("errorMessage", message => {
 
 });
 
-socket.on("gameState", game => {
-
-    onlineGameState = game;
-
-    renderOnlineGame(game);
-
-});
-
 // =========================
 // CARD CLASS
 // =========================
@@ -339,14 +331,6 @@ function render() {
 // ONLINE RENDER
 // =========================
 
-function renderOnlineGame(game) {
-
-    document
-        .getElementById("top-card")
-        .innerText =
-            game.topCard;
-
-}
 
 // =========================
 // RULES
