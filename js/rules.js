@@ -1,22 +1,88 @@
-function canPlay(card, topCard, stackAmount) {
+function canPlay(
+    card,
+    topCard
+) {
 
-    if (stackAmount > 0) {
+    // =====================
+    // SAFETY CHECK
+    // =====================
 
-        const values = {
-            draw2: 2,
-            draw4: 4,
-            draw10: 10
-        };
+    if (
+        !card ||
+        !topCard
+    ) {
 
-        return values[card.type] >= stackAmount;
+        return false;
 
     }
 
-    return (
-        card.color === topCard.color ||
-        card.type === topCard.type ||
-        card.value === topCard.value ||
-        card.color === "wild"
-    );
+    // =====================
+    // SPLIT CARD DATA
+    // =====================
+
+    // Example:
+    // "red-5"
+    // "blue-skip"
+    // "wild-draw4"
+
+    const cardParts =
+        card.split("-");
+
+    const topParts =
+        topCard.split("-");
+
+    // =====================
+    // CARD VALUES
+    // =====================
+
+    const cardColor =
+        cardParts[0];
+
+    const cardValue =
+        cardParts[1];
+
+    const topColor =
+        topParts[0];
+
+    const topValue =
+        topParts[1];
+
+    // =====================
+    // RULES
+    // =====================
+
+    // Same color
+
+    if (
+        cardColor === topColor
+    ) {
+
+        return true;
+
+    }
+
+    // Same value
+
+    if (
+        cardValue === topValue
+    ) {
+
+        return true;
+
+    }
+
+    // Wild cards
+
+    if (
+        cardColor === "wild"
+    ) {
+
+        return true;
+
+    }
+
+    // Invalid
+
+    return false;
 
 }

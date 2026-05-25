@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
     <meta charset="UTF-8">
@@ -15,21 +16,30 @@
 
     <link
         rel="stylesheet"
-        href="style.css"
+        href="css/style.css"
     >
 
 </head>
+
 <body>
 
     <h1>
-        UNO Show 'Em No Mercy
+        UNO NO MERCY
     </h1>
+
+    <!-- GUEST -->
+
+    <div id="guest-name"></div>
+
+    <!-- MENU -->
 
     <div id="menu">
 
         <button id="create-room-btn">
             Create Room
         </button>
+
+        <br><br>
 
         <input
             id="room-input"
@@ -42,49 +52,53 @@
 
     </div>
 
-    <h2 id="turn-text">
-        Turn
-    </h2>
+    <!-- WAITING -->
 
-    <h1 id="stack-text"></h1>
+    <div id="waiting-screen">
 
-    <h2 id="bot-cards">
-        Bot Cards: 0
-    </h2>
+        <h2>
+            Waiting for Players...
+        </h2>
 
-    <div id="top-card">
-        TOP
+        <p>
+            Room Code:
+            <span id="room-code-text"></span>
+        </p>
+
     </div>
 
-    <div id="hand"></div>
+    <!-- GAME -->
 
-    <div id="controls">
+    <div id="game">
+
+        <div id="turn-text"></div>
+
+        <div id="top-card"></div>
+
+        <div id="hand"></div>
 
         <button id="draw-btn">
             Draw Card
         </button>
 
-        <button id="uno-btn">
-            UNO!
-        </button>
-
     </div>
 
+    <!-- SOCKET -->
+
     <script src="http://localhost:3000/socket.io/socket.io.js"></script>
-    
+
+    <!-- JS -->
+
     <script src="js/cards.js"></script>
 
-    <script src="js/socket.js"></script>
-
-    <script src="js/game.js"></script>
-    
     <script src="js/rules.js"></script>
 
     <script src="js/ui.js"></script>
 
-    <script src="js/bot.js"></script>
+    <script src="js/socket.js"></script>
 
-    <script src="js/effects.js"></script>
+    <script src="js/game.js"></script>
 
 </body>
+
 </html>

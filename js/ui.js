@@ -1,42 +1,121 @@
-function render(players, currentPlayer, topCard, stackAmount) {
+function renderOnlineGame(
+    game
+) {
 
-    const handDiv = document.getElementById("hand");
+    const handDiv =
+        document.getElementById(
+            "hand"
+        );
 
     handDiv.innerHTML = "";
 
-    players[0].hand.forEach((card, index) => {
+    const myHand =
+        game.hands[socket.id];
 
-        const div = document.createElement("div");
+    if (!myHand) {
+        return;
+    }
 
-        div.classList.add("card");
-        div.classList.add(card.color);
+    // =====================
+    // TURN
+    // =====================
 
-        div.innerText =
-            card.type === "number"
-                ? card.value
-                : card.type.toUpperCase();
+    const currentPlayerId =
 
-        div.onclick = () => playCard(index);
+        Object.keys(
+            game.hands
+        )[game.currentPlayer];
 
-        handDiv.appendChild(div);
+    document
+        .getElementById(
+            "turn-text"
+        )
+        .innerText =
 
-    });
+        currentPlayerId === socket.id
+            ? "YOUR TURN"
+            : "OPPONENT TURN";
 
-    document.getElementById("turn-text").innerText =
-        "Turn: " + players[currentPlayer].name;
+    // =====================
+    // TOP CARD
+    // =====================
 
-    document.getElementById("stack-text").innerText =
-        stackAmount > 0
-            ? "+" + stackAmount
-            : "";
+    const topDiv =
+        document.getElementById(
+            "top-card"
+        );
 
-    const top = document.getElementById("top-card");
+    const topParts =
+        game.topCard.split("-");
 
-    top.innerText =
-        topCard.type === "number"
-            ? topCard.value
-            : topCard.type.toUpperCase();
+    const topColor =
+        topParts[0];
 
-    top.className = topCard.color;
+    const topValue =
+        topParts[1];
+
+    topDiv.className =
+        "";
+
+    topDiv.classList.add(
+        "card"
+    );
+
+    topDiv.classList.add(
+        topColor
+    );
+
+    topDiv.innerText =
+        topValue.toUpperCase();
+
+    // =====================
+    // HAND
+    // =====================
+
+    myHand.forEach(
+        (
+            card,
+            index
+        ) => {
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+            div.classList.add(
+                "card"
+            );
+
+            const parts =
+                card.split("-");
+
+            const color =
+                parts[0];
+
+            const value =
+                parts[1];
+
+            div.classList.add(
+                color
+            );
+
+            div.innerText =
+                value.toUpperCase();
+
+            div.onclick = () => {
+
+                playCard(
+                    index
+                );
+
+            };
+
+            handDiv.appendChild(
+                div
+            );
+
+        }
+    );
 
 }
