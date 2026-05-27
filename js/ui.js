@@ -16,9 +16,29 @@ function renderOnlineGame(
         return;
     }
 
-    // =====================
+    // UNO BUTTON
+
+    const unoBtn =
+
+        document.getElementById(
+            "uno-btn"
+        );
+
+    if (
+        myHand.length === 1
+    ) {
+
+        unoBtn.style.display =
+            "inline-block";
+
+    } else {
+
+        unoBtn.style.display =
+            "none";
+
+    }
+
     // TURN
-    // =====================
 
     const currentPlayerId =
 
@@ -36,9 +56,7 @@ function renderOnlineGame(
             ? "YOUR TURN"
             : "OPPONENT TURN";
 
-    // =====================
     // TOP CARD
-    // =====================
 
     const topDiv =
         document.getElementById(
@@ -68,9 +86,7 @@ function renderOnlineGame(
     topDiv.innerText =
         topValue.toUpperCase();
 
-    // =====================
     // HAND
-    // =====================
 
     myHand.forEach(
         (
@@ -100,8 +116,77 @@ function renderOnlineGame(
                 color
             );
 
-            div.innerText =
-                value.toUpperCase();
+           let displayValue =
+    value.toUpperCase();
+
+// ICONS
+
+if (
+    value === "skip"
+) {
+
+    displayValue = "🚫";
+
+}
+
+else if (
+    value === "reverse"
+) {
+
+    displayValue = "🔄";
+
+}
+
+else if (
+    value === "draw2"
+) {
+
+    displayValue = "+2";
+
+}
+
+else if (
+    value === "draw4"
+) {
+
+    displayValue = "+4";
+
+}
+
+else if (
+    value === "draw6"
+) {
+
+    displayValue = "+6";
+
+}
+
+else if (
+    value === "draw10"
+) {
+
+    displayValue = "+10";
+
+}
+
+else if (
+    value === "wild"
+) {
+
+    displayValue = "🌈";
+
+}
+
+div.setAttribute(
+    "data-value",
+    displayValue
+);
+
+div.innerHTML = `
+    <span>
+        ${displayValue}
+    </span>
+`;
 
             div.onclick = () => {
 

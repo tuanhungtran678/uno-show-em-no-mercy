@@ -1,67 +1,6 @@
+let pendingWild = null;
 
-
-// =====================
-// CREATE ROOM
-// =====================
-
-document
-    .getElementById(
-        "create-room-btn"
-    )
-    .onclick = () => {
-
-        socket.emit(
-            "createRoom",
-            guestName
-        );
-
-    };
-
-// =====================
-// JOIN ROOM
-// =====================
-
-document
-    .getElementById(
-        "join-room-btn"
-    )
-    .onclick = () => {
-
-        const input =
-
-            document
-                .getElementById(
-                    "room-input"
-                )
-                .value
-                .trim()
-                .toUpperCase();
-
-        if (!input) {
-
-            alert(
-                "Enter room code!"
-            );
-
-            return;
-
-        }
-
-        roomCode = input;
-
-        socket.emit(
-            "joinRoom",
-            {
-                roomCode,
-                guestName
-            }
-        );
-
-    };
-
-// =====================
 // DRAW CARD
-// =====================
 
 document
     .getElementById(
@@ -76,13 +15,46 @@ document
 
     };
 
-// =====================
 // PLAY CARD
-// =====================
 
 function playCard(
     cardIndex
 ) {
+
+    const game =
+        window.latestGameState;
+
+    const myHand =
+        game.hands[
+            socket.id
+        ];
+
+    const card =
+        myHand[
+            cardIndex
+        ];
+
+    // WILD CARD
+
+    if (
+        card.includes(
+            "wild"
+        )
+    ) {
+
+        pendingWild =
+            cardIndex;
+
+        document
+            .getElementById(
+                "color-picker"
+            )
+            .style.display =
+            "flex";
+
+        return;
+
+    }
 
     socket.emit(
         "playCard",
@@ -93,3 +65,57 @@ function playCard(
     );
 
 }
+
+// UNO BUTTON
+
+document
+    .getElementById(
+        "uno-btn"
+    )
+    .onclick = () => {
+
+        socket.emit(
+            "sayUNO",
+            roomCode
+        );
+
+    };
+
+document
+    .querySelectorAll(
+        ".color-btn"
+    )
+    .forEach(
+        btn => {
+
+            btn.onclick = () => {
+
+                const color =
+
+                    btn.innerText
+                    .toLowerCase();
+
+                socket.emit(
+                    "playCard",
+                    {
+                        roomCode,
+
+                        cardIndex:
+                            pendingWild,
+
+                        chosenColor:
+                            color
+                    }
+                );
+
+                document
+                    .getElementById(
+                        "color-picker"
+                    )
+                    .style.display =
+                    "none";
+
+            };
+
+        }
+    );

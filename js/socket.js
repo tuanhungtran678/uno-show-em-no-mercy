@@ -2,15 +2,7 @@ const socket = io(
     "http://localhost:3000"
 );
 
-// =====================
-// GLOBAL ROOM CODE
-// =====================
-
 window.roomCode = "";
-
-// =====================
-// GUEST NAME
-// =====================
 
 window.guestName =
 
@@ -27,9 +19,7 @@ document
     .innerText =
     guestName;
 
-// =====================
 // CREATE ROOM
-// =====================
 
 document
     .getElementById(
@@ -44,9 +34,7 @@ document
 
     };
 
-// =====================
 // JOIN ROOM
-// =====================
 
 document
     .getElementById(
@@ -86,20 +74,13 @@ document
 
     };
 
-// =====================
 // ROOM CREATED
-// =====================
 
 socket.on(
     "roomCreated",
     code => {
 
         roomCode = code;
-
-        console.log(
-            "ROOM:",
-            roomCode
-        );
 
         document
             .getElementById(
@@ -118,9 +99,7 @@ socket.on(
     }
 );
 
-// =====================
 // GAME START
-// =====================
 
 socket.on(
     "gameStart",
@@ -143,19 +122,13 @@ socket.on(
     }
 );
 
-// =====================
 // GAME STATE
-// =====================
 
 socket.on(
     "gameState",
     game => {
-
-        console.log(
-            "GAME STATE:",
-            game
-        );
-
+       window.latestGameState =
+    game;
         renderOnlineGame(
             game
         );
@@ -163,9 +136,7 @@ socket.on(
     }
 );
 
-// =====================
 // GAME ENDED
-// =====================
 
 socket.on(
     "gameEnded",
@@ -190,9 +161,7 @@ socket.on(
     }
 );
 
-// =====================
 // ERROR
-// =====================
 
 socket.on(
     "errorMessage",
